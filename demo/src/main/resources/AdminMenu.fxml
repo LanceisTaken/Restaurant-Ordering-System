@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="727.0" prefWidth="924.0" stylesheets="/dracula.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.AdminMenuController">
+   <children>
+      <HBox prefHeight="31.0" prefWidth="924.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <fx:include fx:id="innerToolbar" source="Toolbar.fxml" />
+         </children>
+      </HBox>
+      <VBox layoutY="46.0" prefHeight="681.0" prefWidth="924.0" spacing="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <VBox prefHeight="67.0" prefWidth="924.0">
+               <children>
+                  <Label fx:id="WelcomeLabel" text="Welcome,">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="LogoutButton" mnemonicParsing="false" onAction="#handleLogout" text="Logout" />
+               </children>
+            </VBox>
+            <HBox spacing="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+               <children>
+                  <Button fx:id="switchToItemsButton" onAction="#switchToItemsTableView" text="Switch to Items" HBox.hgrow="ALWAYS" />
+                  <Button fx:id="switchToUsersButton" onAction="#switchToUsersTableView" text="Switch to Users" HBox.hgrow="ALWAYS" />
+                  <Button fx:id="switchToTransactionsButton" onAction="#switchToTransactionsTableView" text="Switch to Transaction" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox fx:id="tableViewHolder" spacing="10.0" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" />
+            <HBox fx:id="belowTableView" prefHeight="100.0" prefWidth="200.0" />
+            <HBox fx:id="SetCategoryBox" prefHeight="100.0" prefWidth="200.0" />
+            <HBox fx:id="RemoveCategoryBox" prefHeight="100.0" prefWidth="200.0" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

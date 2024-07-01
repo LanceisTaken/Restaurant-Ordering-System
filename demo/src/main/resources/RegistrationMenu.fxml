@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.RegistrationMenuController">
+    <children>
+      <HBox prefHeight="38.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      </HBox>
+      <VBox layoutX="107.0" layoutY="53.0" prefHeight="124.0" prefWidth="187.0" spacing="5.0">
+         <children>
+              <TextField fx:id="nameField" layoutX="107.0" layoutY="38.0" promptText="Name" />
+              <PasswordField fx:id="passwordField" layoutX="107.0" layoutY="69.0" promptText="Password" />
+              <PasswordField fx:id="confirmPasswordField" layoutX="107.0" layoutY="100.0" promptText="Confirm Password" />
+            <AnchorPane>
+               <children>
+                  <HBox AnchorPane.leftAnchor="0.0">
+                     <children>
+                          <Button fx:id="signUpButton" mnemonicParsing="false" onAction="#signUp" text="Sign Up" />
+                     </children>
+                  </HBox>
+                  <HBox AnchorPane.rightAnchor="0.0">
+                     <children>
+                          <Button fx:id="quitButton" layoutX="78.0" mnemonicParsing="false" onAction="#quit" text="Quit" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+    </children>
+</AnchorPane>

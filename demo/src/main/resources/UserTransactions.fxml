@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+
+<AnchorPane prefHeight="431.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.UserTransactionsController">
+    <children>
+      <HBox prefHeight="0.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <fx:include fx:id="innerToolbar" source="Toolbar.fxml" />
+         </children>
+      </HBox>
+        <VBox layoutX="30.0" layoutY="52.0" prefHeight="350.0" prefWidth="540.0" spacing="10.0">
+            <children>
+            <Button mnemonicParsing="false" onAction="#handleReturn" text="Return" />
+                <Label text="User Transactions" />
+                <TableView fx:id="transactionsTable" prefHeight="300.0" prefWidth="540.0">
+                    <columns>
+                        <TableColumn fx:id="dateColumn" prefWidth="200.0" text="Date">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="transactionDateTime" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="reportColumn" prefWidth="340.0" text="Report">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="report" />
+                            </cellValueFactory>
+                        </TableColumn>
+                    </columns>
+                </TableView>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

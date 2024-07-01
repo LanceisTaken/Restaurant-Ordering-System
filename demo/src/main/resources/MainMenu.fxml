@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="/dracula.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.MainMenuController">
+   <children>
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <fx:include fx:id="innerToolbar" source="Toolbar.fxml" />
+         </children>
+      </HBox>
+      <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="81.0" prefWidth="549.0" spacing="5.0">
+         <children>
+            <Label prefHeight="81.0" prefWidth="140.0" text="Your Balance:">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
+            <Label fx:id="balanceLabel" prefHeight="81.0" prefWidth="261.0" text="Loading balance...">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <VBox alignment="CENTER" prefHeight="357.0" prefWidth="600.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#handleOrdering" prefHeight="31.0" prefWidth="99.0" text="Order Food" />
+            <Button mnemonicParsing="false" onAction="#handleTopUp" prefHeight="31.0" prefWidth="124.0" text="Top-Up" />
+            <Button mnemonicParsing="false" onAction="#handleUserTransactions" prefHeight="31.0" prefWidth="149.0" text="Transaction History" />
+            <Button mnemonicParsing="false" onAction="#handleLogout" prefHeight="31.0" prefWidth="172.0" text="Log Out" />
+         </children>
+      </VBox>
+   </children>
+</VBox>

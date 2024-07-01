@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox alignment="TOP_RIGHT" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.WindowButtonsController">
+   <children>
+       <!-- Minimize button -->
+       <Button onAction="#minimizeAction" styleClass="borderless-button" text="_" />
+       <!-- Maximize button -->
+       <Button onAction="#maximizeAction" styleClass="borderless-button" text="[]" />
+       <!-- Close button -->
+       <Button onAction="#closeAction" styleClass="borderless-button" text="X" />
+   </children>
+</HBox>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="780.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.OrderMenuController">
+    <children>
+      <HBox prefHeight="45.0" prefWidth="1231.0">
+         <children>
+            <fx:include fx:id="innerToolbar" source="Toolbar.fxml" />
+         </children>
+      </HBox>
+        <HBox fx:id="ButtonsAboveScrollPane" spacing="5.0">
+            <children>
+                <Button fx:id="GoBackButton" mnemonicParsing="false" onAction="#handleGoBack" text="Go Back" />
+            </children>
+        </HBox>
+        <HBox fx:id="MainBox" maxHeight="-Infinity" maxWidth="-Infinity" spacing="10">
+            <children>
+                <VBox fx:id="FoodSelection" prefHeight="1077.0" prefWidth="609.0" spacing="10">
+                    <children>
+                        <!-- Dynamic loading of items for each category -->
+                        <VBox fx:id="appetizersVBox" />
+                        <VBox fx:id="mainCoursesVBox" />
+                        <VBox fx:id="dessertsVBox" />
+                    </children>
+                </VBox>
+                <VBox alignment="TOP_CENTER" fillWidth="false" minHeight="-Infinity" minWidth="-Infinity" spacing="10" HBox.hgrow="NEVER">
+                    <children>
+                        <Label text="Order Summary" />
+                        <ListView fx:id="orderSummaryListView" prefHeight="479.0" prefWidth="297.0" VBox.vgrow="NEVER" />
+                        <VBox alignment="CENTER" spacing="10">
+                            <children>
+                                <Label fx:id="totalPrice" text="Total: RM0.0" />
+                                <Button fx:id="removeButton" onAction="#handleRemoveButtonAction" text="Remove" />
+                                <Button mnemonicParsing="false" onAction="#handleCheckout" text="Checkout" />
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+                <VBox fx:id="ReportBox" prefHeight="780.0" prefWidth="316.0" />
+            </children>
+        </HBox>
+    </children>
+</VBox>

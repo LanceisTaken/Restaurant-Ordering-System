@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.TopUpMenuController">
+   <children>
+      <HBox prefHeight="0.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <fx:include fx:id="innerToolbar" source="Toolbar.fxml" />
+         </children>
+      </HBox>
+      <VBox alignment="CENTER" fillWidth="false" layoutX="41.0" layoutY="79.0">
+         <children>
+            <Label layoutX="41.0" layoutY="79.0" text="Please enter the amount you would like to topup">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="AmountField" layoutX="189.0" layoutY="114.0" minHeight="-Infinity" minWidth="-Infinity" promptText="RM:" />
+            <Button fx:id="TopUpButton" mnemonicParsing="false" onAction="#handleTopUp" prefHeight="31.0" prefWidth="68.0" text="Enter" />
+            <Button fx:id="GoBackButton" mnemonicParsing="false" onAction="#handleGoBack" prefHeight="31.0" prefWidth="83.0" text="Go Back" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

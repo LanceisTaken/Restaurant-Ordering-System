@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+
+
+<HBox  prefHeight="45.0" prefWidth="1935.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.ToolbarController">
+    <children> <!-- Include window buttons -->
+        <ToolBar fx:id="toolbar" onMouseDragged="#handleMouseDragged" onMousePressed="#handleMousePressed" pickOnBounds="false" prefHeight="45.0" prefWidth="573.0" HBox.hgrow="ALWAYS">
+            <items>
+                <VBox HBox.hgrow="ALWAYS">
+                    <children>
+                        <!-- Happy.png icon -->
+                        <ImageView fitHeight="30" fitWidth="30">
+                            <image>
+                                <Image url="@/Happy.png" />
+                            </image>
+                        </ImageView>
+                    </children>
+                </VBox>
+                <HBox alignment="TOP_RIGHT">
+                    <children>
+                        <fx:include source="WindowButtons.fxml" />
+                    </children>
+                </HBox>
+            </items>
+        </ToolBar>
+    </children>
+</HBox>
