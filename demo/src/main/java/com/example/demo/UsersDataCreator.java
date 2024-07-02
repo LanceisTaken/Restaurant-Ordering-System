@@ -45,7 +45,7 @@ public class UsersDataCreator {
         Items.add(new Items("Cendol", 9.9,"Desserts","/cendol.PNG"));
         Items.add(new Items("Ais Kacang", 9.9,"Desserts","/aiskacang.PNG"));
         Items.add(new Items("ABC Special", 11.9,"Desserts","/ABC Special.PNG"));
-        Items.add(new Items("Orea Milkshake", 15.9,"Desserts","/oreamilkshake.PNG"));
+        Items.add(new Items("Oreo Milkshake", 15.9,"Desserts","/oreamilkshake.PNG"));
 
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("items.dat"))) {
             oos.writeObject(Items);

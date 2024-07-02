@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -60,11 +61,29 @@ public class Items implements Serializable {
     }
 
     private static byte[] loadImageDataFromFile(String filePath) {
-        try {
-            Path path = Path.of(filePath);
-            return Files.readAllBytes(path);
+        // Check if the file path is a resource path
+        if (filePath.startsWith("/")) {
+            return loadImageDataFromResource(filePath);
+        } else {
+            try {
+                Path path = Path.of(filePath);
+                return Files.readAllBytes(path);
+            } catch (IOException e) {
+                // Handle file not found or other IO errors
+                e.printStackTrace();
+                return null; // Or throw an exception to propagate the error
+            }
+        }
+    }
+
+    private static byte[] loadImageDataFromResource(String resourcePath) {
+        try (InputStream inputStream = Items.class.getResourceAsStream(resourcePath)) {
+            if (inputStream == null) {
+                throw new IOException("Resource not found: " + resourcePath);
+            }
+            return inputStream.readAllBytes();
         } catch (IOException e) {
-            // Handle file not found or other IO errors
+            // Handle resource not found or other IO errors
             e.printStackTrace();
             return null; // Or throw an exception to propagate the error
         }

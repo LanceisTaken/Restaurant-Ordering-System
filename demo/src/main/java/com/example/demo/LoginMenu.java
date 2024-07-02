@@ -24,8 +24,7 @@ public class LoginMenu extends Application {
     LoginMenuController controller;
 
     public UserDatabase getUserdatabase() {
-        return userdatabase;
-    }
+        return userdatabase;}
 
     public LoginMenuController getController() {
         return controller;

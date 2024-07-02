@@ -59,10 +59,10 @@ public class AdminMenuController {
     private TableView<Items> itemsTableView;
     private TableView<Users> usersTableView;
     private TableView<Transaction> transactionTableView;
-    private ObservableList<Items> itemList;
+    public ObservableList<Items> itemList;
     private ObservableList<Users> userList;
     private ObservableList<Transaction> transactionList;
-    private ItemDatabase itemDatabase;
+    public ItemDatabase itemDatabase;
     private UserDatabase userDatabase;
     private TransactionDatabase transactionDatabase;
     private Button addButton;
@@ -542,7 +542,7 @@ public class AdminMenuController {
         // Add buttons and text fields to the layout
         belowTableView.getChildren().addAll(addButton, removeButton, textField1, textField2, categoryComboBox, imageBox);
         SetCategoryBox.getChildren().addAll(categoryField,setNewCategory);
-        RemoveCategoryBox.getChildren().addAll(categoryComboBox,RemoveNewCategory);
+        //RemoveCategoryBox.getChildren().addAll(categoryComboBox,RemoveNewCategory);
     }
 
     public void addCategory(TextField categoryField){
@@ -590,48 +590,13 @@ public class AdminMenuController {
 
 
     public void addItem() {
-        // Get the input from the text fields
-        String name = textField1.getText();
-        String priceText = textField2.getText();
-        String category = categoryComboBox.getValue();
-        String filePath = filePathField.getText();
-
-        // Check if any of the fields are empty
-        if (name.isEmpty() || priceText.isEmpty() || category == null|| filePath.isEmpty()) {
-            showAlert(AlertType.ERROR, "Error", "Missing Information", "Please fill in all fields.");
-            return;
-        }
-
-        // Validate the price format
-        double price;
+        AddItemWindow addItemPopup = new AddItemWindow(this);
+        Stage stagePopup = new Stage();
         try {
-            price = Double.parseDouble(String.format("%.2f", Double.parseDouble(priceText)));
-        } catch (NumberFormatException e) {
-            // Handle invalid price format
-            showAlert(AlertType.ERROR, "Error", "Invalid Price", "Price must be a valid number.");
-            return;
+            addItemPopup.start(stagePopup);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-
-        // Ensure price has no more than 2 decimal places
-        if ((String.valueOf(price).indexOf('.') != -1 ? String.valueOf(price).substring(String.valueOf(price).indexOf('.') + 1).length() : 0) > 2) {
-            // Display error message or handle as appropriate
-            showAlert(AlertType.ERROR, "Error", "Invalid Price", "Price must have no more than 2 decimal places.");
-            return;
-        }
-
-        // Create a new item with the input
-        Items newItem = new Items(name, price, category, filePath);
-
-        // Add the new item to the database
-        itemDatabase.addObject(newItem);
-        //Updates the TableView
-        itemList.add(newItem);
-
-        // Clear the text fields
-        clearItemsTextField();
-
-        //Alert
-        showAlert(AlertType.INFORMATION,"Success","Successfully Added","Your Item has been added successfully");
     }
 
     public void removeItem() {
@@ -708,7 +673,7 @@ public class AdminMenuController {
         textField1.clear();
         textField2.clear();
     }
-    private void showAlert(AlertType alertType, String title, String headerText, String contentText) {
+    public void showAlert(AlertType alertType, String title, String headerText, String contentText) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setHeaderText(headerText);
