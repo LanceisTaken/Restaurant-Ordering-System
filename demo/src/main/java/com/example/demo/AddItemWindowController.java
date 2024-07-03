@@ -64,6 +64,7 @@ public class AddItemWindowController {
         String name = nameField.getText();
         String priceText = priceField.getText();
         String category = categoryComboBox.getValue();
+        String filePath = filePathField.getText();
 
         // Check if any of the fields are empty
         if (name.isEmpty() || priceText.isEmpty() || category == null) {
@@ -89,7 +90,7 @@ public class AddItemWindowController {
         }
 
         // Create a new item with the input
-        Items newItem = new Items(name, price, category, "");
+        Items newItem = new Items(name, price, category, filePath);
 
         // Add the new item to the database
         adminMenuController.itemDatabase.addObject(newItem);
