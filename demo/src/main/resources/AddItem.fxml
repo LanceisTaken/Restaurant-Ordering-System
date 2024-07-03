@@ -5,39 +5,48 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.layout.StackPane?>
-<VBox xmlns="http://javafx.com/javafx/11.0.2"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.demo.AddItemWindowController">
-    <children>
-        <HBox alignment="CENTER">
-            <Label text="Name:"/>
-            <TextField fx:id="nameField"/>
-        </HBox>
-        <HBox alignment="CENTER">
-            <Label text="Price:"/>
-            <TextField fx:id="priceField"/>
-        </HBox>
-        <HBox alignment="CENTER">
-            <Label text="Category:"/>
-            <ComboBox fx:id="categoryComboBox"/>
-        </HBox>
-        <HBox alignment="CENTER">
-            <HBox alignment="CENTER">
-                <StackPane style="-fx-border-color: black; -fx-border-width: 1px;">
-                    <ImageView fx:id="imageView"/>
-                    <Label text="No image selected" />
-                </StackPane>
+<AnchorPane prefHeight="248.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.AddItemWindowController">
+   <children>
+      <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="212.0" prefWidth="320.0">
+          <children>
+            <HBox prefHeight="45.0" prefWidth="1935.0" />
+              <HBox alignment="CENTER">
+                  <Label text="Name:" />
+                  <TextField fx:id="nameField" />
+              </HBox>
+              <HBox alignment="CENTER">
+                  <Label text="Price:" />
+                  <TextField fx:id="priceField" />
+              </HBox>
+              <HBox alignment="CENTER">
+                  <Label text="Category:" />
+                  <ComboBox fx:id="categoryComboBox" promptText="Select Category" />
+              </HBox>
+              <HBox alignment="CENTER">
+                  <HBox alignment="CENTER">
+                      <StackPane prefHeight="100.0" prefWidth="139.0" style="-fx-border-color: black; -fx-border-width: 1px;">
+                          <ImageView fx:id="imageView" fitHeight="100.0" fitWidth="139.0" preserveRatio="true" />
+                          <Label text="No image selected" />
+                      </StackPane>
+                  </HBox>
+                  <Button fx:id="selectImageButton" onAction="#selectImage" text="Select Image" />
+              </HBox>
+            <HBox alignment="CENTER" prefHeight="25.0" prefWidth="306.0" spacing="70.0">
+               <children>
+                    <Button fx:id="addItemButton" onAction="#addItem" text="Add Item" />
+                  <Button fx:id="GoBackButton" onAction="#closeWindow" text="Go Back" />
+               </children>
             </HBox>
-            <Button text="Select Image" fx:id="selectImageButton" onAction="#selectImage"/>
-        </HBox>
-        <HBox alignment="CENTER" managed="false">
-            <Label text="FilePathField"/>
-            <TextField fx:id="filePathField"/>
-        </HBox>
-        <Button text="Add Item" fx:id="addItemButton" onAction="#addItem"/>
-    </children>
-</VBox>
+              <HBox alignment="CENTER" managed="false" visible="false">
+                  <Label text="FilePathField" />
+                  <TextField fx:id="filePathField" />
+              </HBox>
+          </children>
+      </VBox>
+   </children>
+</AnchorPane>

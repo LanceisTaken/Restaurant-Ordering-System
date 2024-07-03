@@ -14,9 +14,11 @@ import java.io.IOException;
 
 public class AddItemWindow extends Application {
     private AdminMenuController adminMenuController;
+    private LoginMenuController loginMenuController;
 
-    public AddItemWindow(AdminMenuController adminMenuController) {
+    public AddItemWindow(AdminMenuController adminMenuController,LoginMenuController loginMenuController) {
         this.adminMenuController = adminMenuController;
+        this.loginMenuController = loginMenuController;
     }
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -25,10 +27,11 @@ public class AddItemWindow extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/AddItem.fxml"));
         Parent AddItemWindowRoot = loader.load();
         AddItemWindowController addItemWindowController = loader.getController();
-        addItemWindowController.setup(adminMenuController);
+        addItemWindowController.setup(adminMenuController,loginMenuController);
+        addItemWindowController.setStage(primaryStage);
 
         primaryStage.setTitle("Add Item Window");
-        primaryStage.setScene(new Scene(AddItemWindowRoot, 600, 400));
+        primaryStage.setScene(new Scene(AddItemWindowRoot, 320, 250));
         primaryStage.getScene().getStylesheets().add(getClass().getResource("/dracula.css").toExternalForm());
         primaryStage.show();
     }

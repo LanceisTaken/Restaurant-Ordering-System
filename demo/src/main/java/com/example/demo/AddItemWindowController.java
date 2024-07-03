@@ -28,14 +28,20 @@ public class AddItemWindowController {
 
     private Stage stage;
     private AdminMenuController adminMenuController;
+    private LoginMenuController loginMenuController;
+    private ItemDatabase itemDatabase;
 
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
-    public void setup(AdminMenuController adminMenuController) {
+    public void setup(AdminMenuController adminMenuController,LoginMenuController controller) {
         this.adminMenuController = adminMenuController;
+        this.loginMenuController = controller;
+        this.itemDatabase = loginMenuController.getItemDatabase();
+        categoryComboBox.getItems().addAll(itemDatabase.getCategorySet());
     }
+
 
 
     @FXML
@@ -99,4 +105,10 @@ public class AddItemWindowController {
         // Close the popup window
         stage.close();
     }
+
+    @FXML
+    private void closeWindow(){
+        stage.close();
+    }
+
 }

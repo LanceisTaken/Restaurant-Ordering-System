@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 public class AdminMenu extends Application {
@@ -26,6 +27,16 @@ public class AdminMenu extends Application {
         adminMenuController.setStage(primaryStage);
         adminMenuController.initializeController();
 
+        // Load Toolbar.fxml separately to access its controller
+        FXMLLoader toolbarLoader = new FXMLLoader(getClass().getResource("/Toolbar.fxml"));
+        Parent toolbarRoot = toolbarLoader.load();
+        ToolbarController toolbarController = toolbarLoader.getController();
+
+// Now set the stage for ToolbarController (if needed) or perform any necessary initialization
+        toolbarController.setStage(primaryStage);
+
+        AnchorPane innerToolbar = (AnchorPane) root.lookup("#innerToolbar");
+        innerToolbar.getChildren().add(toolbarRoot);
 
 
 

@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -145,5 +146,9 @@ public class LoginMenuController {
     }
     public void setMainMenuStage(Stage mainMenuStage) {
         this.mainMenuStage = mainMenuStage;
+    }
+    @FXML
+    private void quit(ActionEvent event){
+        Platform.exit();
     }
 }

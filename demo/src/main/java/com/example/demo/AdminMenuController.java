@@ -92,6 +92,7 @@ public class AdminMenuController {
         this.itemDatabase = loginMenuController.getItemDatabase();
         this.transactionDatabase = loginMenuController.getTransactionDatabase();
 
+
         itemList = FXCollections.observableArrayList(itemDatabase.getObjectArray());
         userList = FXCollections.observableArrayList(userDatabase.getObjectArray());
         transactionList = FXCollections.observableArrayList(transactionDatabase.getObjectArray());
@@ -448,10 +449,10 @@ public class AdminMenuController {
     private void switchToItemsTableView() {
         tableViewHolder.getChildren().clear(); // Clear current content
         tableViewHolder.getChildren().add(itemsTableView); // Add items table view
-        belowTableView.getChildren().clear(); // Clear buttons and text fields
+//        belowTableView.getChildren().clear(); // Clear buttons and text fields
         SetCategoryBox.getChildren().clear();
         RemoveCategoryBox.getChildren().clear();
-        createItemsFields();
+//        createItemsFields();
     }
 
     @FXML
@@ -475,10 +476,10 @@ public class AdminMenuController {
 
     private void createItemsFields() {
         //Input Fields
-        textField1 = new TextField();
-        textField1.setPromptText("Name");
-        textField2 = new TextField();
-        textField2.setPromptText("Price");
+//        textField1 = new TextField();
+//        textField1.setPromptText("Name");
+//        textField2 = new TextField();
+//        textField2.setPromptText("Price");
         TextField categoryField = new TextField();
         categoryField.setPromptText("Enter name of new category");
         addButton = new Button("Add");
@@ -497,50 +498,50 @@ public class AdminMenuController {
         categoryComboBox.setPromptText("Category");
         System.out.println(itemDatabase.getCategorySet());
         RemoveNewCategory.setOnAction(event -> removeCategory(categoryComboBox));
-        filePathField = new TextField();
-        filePathField.setVisible(false);
+//        filePathField = new TextField();
+//        filePathField.setVisible(false);
 
-        // Create a preview box for the selected image
-        imageView = new ImageView();
-        imageView.setFitWidth(300); // Set the width of the preview box
-        imageView.setFitHeight(135); // Set the height of the preview box
-        imageView.setPreserveRatio(true); // Maintain aspect ratio
-
-        // Button to open file chooser
-        Button selectImageButton = new Button("Select Image");
-        selectImageButton.setOnAction(e -> {
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("Open Image File");
-            fileChooser.getExtensionFilters().addAll(
-                    new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif")
-            );
-            File selectedFile = fileChooser.showOpenDialog(stage);
-            if (selectedFile != null) {
-                String imagePath = selectedFile.getAbsolutePath();
-                filePathField.setText(imagePath);
-                imageView.setImage(new Image("file:" + imagePath));
-            }
-        });
-
-        // Create a StackPane to contain imageView and label
-        StackPane imageStackPane = new StackPane();
-        imageStackPane.setPrefWidth(200); // Set the width of the preview box
-        imageStackPane.setPrefHeight(135); // Set the height of the preview box
-        imageStackPane.getChildren().addAll(imageView, createNoImageLabel(imageView));
-        imageStackPane.setAlignment(Pos.CENTER);
-
-        // Set the alignment of the imageView within the StackPane to center
-        StackPane.setAlignment(imageView, Pos.CENTER);
-
-        // Add border to StackPane
-        imageStackPane.setStyle("-fx-border-color: black; -fx-border-width: 1px;");
-
-        // Create a VBox to hold imageView, selectImageButton, and filePathField
-        VBox imageBox = new VBox();
-        imageBox.getChildren().addAll(imageStackPane, selectImageButton, filePathField);
+//        // Create a preview box for the selected image
+//        imageView = new ImageView();
+//        imageView.setFitWidth(300); // Set the width of the preview box
+//        imageView.setFitHeight(135); // Set the height of the preview box
+//        imageView.setPreserveRatio(true); // Maintain aspect ratio
+//
+//        // Button to open file chooser
+//        Button selectImageButton = new Button("Select Image");
+//        selectImageButton.setOnAction(e -> {
+//            FileChooser fileChooser = new FileChooser();
+//            fileChooser.setTitle("Open Image File");
+//            fileChooser.getExtensionFilters().addAll(
+//                    new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif")
+//            );
+//            File selectedFile = fileChooser.showOpenDialog(stage);
+//            if (selectedFile != null) {
+//                String imagePath = selectedFile.getAbsolutePath();
+//                filePathField.setText(imagePath);
+//                imageView.setImage(new Image("file:" + imagePath));
+//            }
+//        });
+//
+//        // Create a StackPane to contain imageView and label
+//        StackPane imageStackPane = new StackPane();
+//        imageStackPane.setPrefWidth(200); // Set the width of the preview box
+//        imageStackPane.setPrefHeight(135); // Set the height of the preview box
+//        imageStackPane.getChildren().addAll(imageView, createNoImageLabel(imageView));
+//        imageStackPane.setAlignment(Pos.CENTER);
+//
+//        // Set the alignment of the imageView within the StackPane to center
+//        StackPane.setAlignment(imageView, Pos.CENTER);
+//
+//        // Add border to StackPane
+//        imageStackPane.setStyle("-fx-border-color: black; -fx-border-width: 1px;");
+//
+//        // Create a VBox to hold imageView, selectImageButton, and filePathField
+//        VBox imageBox = new VBox();
+//        imageBox.getChildren().addAll(imageStackPane, selectImageButton, filePathField);
 
         // Add buttons and text fields to the layout
-        belowTableView.getChildren().addAll(addButton, removeButton, textField1, textField2, categoryComboBox, imageBox);
+        belowTableView.getChildren().addAll(addButton, removeButton);
         SetCategoryBox.getChildren().addAll(categoryField,setNewCategory);
         //RemoveCategoryBox.getChildren().addAll(categoryComboBox,RemoveNewCategory);
     }
@@ -590,7 +591,7 @@ public class AdminMenuController {
 
 
     public void addItem() {
-        AddItemWindow addItemPopup = new AddItemWindow(this);
+        AddItemWindow addItemPopup = new AddItemWindow(this,loginMenuController);
         Stage stagePopup = new Stage();
         try {
             addItemPopup.start(stagePopup);
@@ -747,7 +748,7 @@ public class AdminMenuController {
         textField2.clear();
     }
     public void setStage(Stage primaryStage) {
-        this.stage = primaryStage;
+        stage = primaryStage;
     }
 }
 class CustomDoubleStringConverter extends DoubleStringConverter {

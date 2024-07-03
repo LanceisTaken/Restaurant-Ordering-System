@@ -7,11 +7,17 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class WindowButtonsController extends HBox {
+
     // Reference to the stage to perform actions on
     public Stage stage;
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
     @FXML
     private void closeAction(ActionEvent event) {
-        Platform.exit();
+        stage.close();
     }
     // Method for minimizing the stage
     @FXML
