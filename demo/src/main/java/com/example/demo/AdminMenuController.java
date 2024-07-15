@@ -490,7 +490,7 @@ public class AdminMenuController {
         //Event Handling
         addButton.setOnAction(event -> addItem());
         removeButton.setOnAction(event -> removeItem());
-        setNewCategory.setOnAction(event -> addCategory(categoryField));
+        setNewCategory.setOnAction(event -> addCategory());
 
         // Create ComboBox for category
         categoryComboBox = new ComboBox<>();
@@ -541,26 +541,18 @@ public class AdminMenuController {
 //        imageBox.getChildren().addAll(imageStackPane, selectImageButton, filePathField);
 
         // Add buttons and text fields to the layout
-        belowTableView.getChildren().addAll(addButton, removeButton);
-        SetCategoryBox.getChildren().addAll(categoryField,setNewCategory);
+        belowTableView.getChildren().addAll(addButton, removeButton,setNewCategory);
         //RemoveCategoryBox.getChildren().addAll(categoryComboBox,RemoveNewCategory);
     }
 
-    public void addCategory(TextField categoryField){
-        String category = categoryField.getText();
-        // Check if any of the fields are empty
-        if (category.isEmpty()) {
-            showAlert(AlertType.ERROR, "Error", "Missing Information", "Please fill in all fields.");
-            return;
+    public void addCategory(){
+        AddCategoryWindow addCategoryPopup = new AddCategoryWindow(this,loginMenuController);
+        Stage stagePopup = new Stage();
+        try {
+            addCategoryPopup.start(stagePopup);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-        itemDatabase.addCategory(category);
-        showAlert(AlertType.INFORMATION,"Success","Successfully Added","Your new Category has been added successfully");
-        tableViewHolder.getChildren().clear(); // Clear current content
-        tableViewHolder.getChildren().add(itemsTableView); // Add items table view
-        belowTableView.getChildren().clear(); // Clear buttons and text fields
-        SetCategoryBox.getChildren().clear();
-        RemoveCategoryBox.getChildren().clear();
-        initializeController();
     }
     public void removeCategory(ComboBox<String> categoryComboBox){
         String category = categoryComboBox.getValue();
