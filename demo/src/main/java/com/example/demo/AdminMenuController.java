@@ -75,6 +75,7 @@ public class AdminMenuController {
     private ComboBox<Users> userComboBox;
     private Stage stage; // Reference to the stage for file chooser
     private LoginMenuController loginMenuController;
+    private ArrayList<String> categorySet;
 
     public void setLoginMenuController(LoginMenuController controller) {
         this.loginMenuController = controller;
@@ -92,10 +93,14 @@ public class AdminMenuController {
         this.itemDatabase = loginMenuController.getItemDatabase();
         this.transactionDatabase = loginMenuController.getTransactionDatabase();
 
-
         itemList = FXCollections.observableArrayList(itemDatabase.getObjectArray());
         userList = FXCollections.observableArrayList(userDatabase.getObjectArray());
         transactionList = FXCollections.observableArrayList(transactionDatabase.getObjectArray());
+
+        categorySet = itemDatabase.getCategorySet();
+        String[] categoryArray = categorySet.toArray(new String[0]);
+
+
 
         //Welcoming Admin
         this.currentUser = loginMenuController.getLoggedInUser();
@@ -131,14 +136,14 @@ public class AdminMenuController {
         //Items Category
         TableColumn<Items, String> itemsCategoryColumn = new TableColumn<>("Category");
         itemsCategoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
-        itemsCategoryColumn.setCellFactory(ComboBoxTableCell.forTableColumn("Main Course", "Dessert", "Appetizers"));
+        itemsCategoryColumn.setCellFactory(ComboBoxTableCell.forTableColumn(categoryArray));
         itemsCategoryColumn.setOnEditCommit((TableColumn.CellEditEvent<Items, String> event) -> {
             // On editing commit, update item category
             Items item = event.getRowValue();
             String newValue = event.getNewValue();
             String oldValue = event.getOldValue();
             if (!isValidCategory(newValue)) {
-                showAlert(AlertType.ERROR, "Error", "Invalid Category", "Category must be either Main Course, Dessert, or Appetizers.");
+                showAlert(AlertType.ERROR, "Error", "Invalid Category", "Category does not exists");
                 itemDatabase.setCategory(oldValue,item);
                 return;
             }
@@ -474,12 +479,30 @@ public class AdminMenuController {
         createTransactionsFields();
     }
 
+    @FXML
+    private void refresh(){
+        // Clear table views
+        itemsTableView.getItems().clear();
+        usersTableView.getItems().clear();
+        transactionTableView.getItems().clear();
+
+        // Clear table columns
+        itemsTableView.getColumns().clear();
+        usersTableView.getColumns().clear();
+        transactionTableView.getColumns().clear();
+
+        // Clear additional UI elements
+        tableViewHolder.getChildren().clear();
+
+        // Re-initialize table views and columns
+        initializeController();
+    }
+
     private void createItemsFields() {
+        // Clear the belowTableView
+        belowTableView.getChildren().clear();
+
         //Input Fields
-//        textField1 = new TextField();
-//        textField1.setPromptText("Name");
-//        textField2 = new TextField();
-//        textField2.setPromptText("Price");
         TextField categoryField = new TextField();
         categoryField.setPromptText("Enter name of new category");
         addButton = new Button("Add");
@@ -492,57 +515,8 @@ public class AdminMenuController {
         removeButton.setOnAction(event -> removeItem());
         setNewCategory.setOnAction(event -> addCategory());
 
-        // Create ComboBox for category
-        categoryComboBox = new ComboBox<>();
-        categoryComboBox.getItems().addAll(itemDatabase.getCategorySet());
-        categoryComboBox.setPromptText("Category");
-        System.out.println(itemDatabase.getCategorySet());
-        RemoveNewCategory.setOnAction(event -> removeCategory(categoryComboBox));
-//        filePathField = new TextField();
-//        filePathField.setVisible(false);
-
-//        // Create a preview box for the selected image
-//        imageView = new ImageView();
-//        imageView.setFitWidth(300); // Set the width of the preview box
-//        imageView.setFitHeight(135); // Set the height of the preview box
-//        imageView.setPreserveRatio(true); // Maintain aspect ratio
-//
-//        // Button to open file chooser
-//        Button selectImageButton = new Button("Select Image");
-//        selectImageButton.setOnAction(e -> {
-//            FileChooser fileChooser = new FileChooser();
-//            fileChooser.setTitle("Open Image File");
-//            fileChooser.getExtensionFilters().addAll(
-//                    new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif")
-//            );
-//            File selectedFile = fileChooser.showOpenDialog(stage);
-//            if (selectedFile != null) {
-//                String imagePath = selectedFile.getAbsolutePath();
-//                filePathField.setText(imagePath);
-//                imageView.setImage(new Image("file:" + imagePath));
-//            }
-//        });
-//
-//        // Create a StackPane to contain imageView and label
-//        StackPane imageStackPane = new StackPane();
-//        imageStackPane.setPrefWidth(200); // Set the width of the preview box
-//        imageStackPane.setPrefHeight(135); // Set the height of the preview box
-//        imageStackPane.getChildren().addAll(imageView, createNoImageLabel(imageView));
-//        imageStackPane.setAlignment(Pos.CENTER);
-//
-//        // Set the alignment of the imageView within the StackPane to center
-//        StackPane.setAlignment(imageView, Pos.CENTER);
-//
-//        // Add border to StackPane
-//        imageStackPane.setStyle("-fx-border-color: black; -fx-border-width: 1px;");
-//
-//        // Create a VBox to hold imageView, selectImageButton, and filePathField
-//        VBox imageBox = new VBox();
-//        imageBox.getChildren().addAll(imageStackPane, selectImageButton, filePathField);
-
         // Add buttons and text fields to the layout
-        belowTableView.getChildren().addAll(addButton, removeButton,setNewCategory);
-        //RemoveCategoryBox.getChildren().addAll(categoryComboBox,RemoveNewCategory);
+        belowTableView.getChildren().addAll(addButton, removeButton,setNewCategory, RemoveNewCategory);
     }
 
     public void addCategory(){
@@ -675,7 +649,8 @@ public class AdminMenuController {
     }
     // Validation for category
     private boolean isValidCategory(String category) {
-        return category != null && (category.equalsIgnoreCase("Main Course") || category.equalsIgnoreCase("Dessert") || category.equalsIgnoreCase("Appetizers"));
+        ArrayList<String> categorySet = itemDatabase.getCategorySet();
+        return category != null && categorySet.contains(category);
     }
     // Method to create label when no image is selected
     private Label createNoImageLabel(ImageView imageView) {

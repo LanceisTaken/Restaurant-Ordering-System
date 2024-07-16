@@ -18,7 +18,12 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Button fx:id="LogoutButton" mnemonicParsing="false" onAction="#handleLogout" text="Logout" />
+                  <HBox spacing="10.0">
+                     <children>
+                        <Button fx:id="LogoutButton" mnemonicParsing="false" onAction="#handleLogout" text="Logout" />
+                        <Button mnemonicParsing="false" onAction="#refresh" text="Refresh" />
+                     </children>
+                  </HBox>
                </children>
             </VBox>
             <HBox spacing="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
