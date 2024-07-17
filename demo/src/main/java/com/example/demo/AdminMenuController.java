@@ -514,6 +514,7 @@ public class AdminMenuController {
         addButton.setOnAction(event -> addItem());
         removeButton.setOnAction(event -> removeItem());
         setNewCategory.setOnAction(event -> addCategory());
+        RemoveNewCategory.setOnAction(event -> removeCategory());
 
         // Add buttons and text fields to the layout
         belowTableView.getChildren().addAll(addButton, removeButton,setNewCategory, RemoveNewCategory);
@@ -528,31 +529,14 @@ public class AdminMenuController {
             throw new RuntimeException(e);
         }
     }
-    public void removeCategory(ComboBox<String> categoryComboBox){
-        String category = categoryComboBox.getValue();
-        // Check if any of the fields are empty
-        if (category == null || category.isEmpty()) {
-            showAlert(AlertType.ERROR, "Error", "Missing Information", "Please select a category to remove.");
-            return;
+    public void removeCategory(){
+        RemoveCategoryWindow removeCategoryPopup = new RemoveCategoryWindow(this,loginMenuController);
+        Stage stagePopup = new Stage();
+        try {
+            removeCategoryPopup.start(stagePopup);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-
-        // Check if any item is assigned the category being removed
-        for (Items item : itemDatabase.getObjectArray()) {
-            if (item.getCategory().equals(category)) {
-                showAlert(AlertType.ERROR, "Error", "Cannot Remove Category",
-                        "Category cannot be removed as it is assigned to an item in the database.");
-                return;
-            }
-        }
-        // No items found with the category being removed, proceed with removal
-        itemDatabase.removeCategory(category);
-        showAlert(AlertType.INFORMATION,"Success","Successfully Removed","Your Category has been removed successfully");
-        tableViewHolder.getChildren().clear(); // Clear current content
-        tableViewHolder.getChildren().add(itemsTableView); // Add items table view
-        belowTableView.getChildren().clear(); // Clear buttons and text fields
-        SetCategoryBox.getChildren().clear();
-        RemoveCategoryBox.getChildren().clear();
-        initializeController();
     }
 
 
