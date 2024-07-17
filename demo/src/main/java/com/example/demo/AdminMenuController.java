@@ -57,17 +57,13 @@ public class AdminMenuController {
     private TableView<Transaction> transactionTableView;
     public ObservableList<Items> itemList;
     protected ObservableList<Users> userList;
-    private ObservableList<Transaction> transactionList;
+    protected ObservableList<Transaction> transactionList;
     public ItemDatabase itemDatabase;
     private UserDatabase userDatabase;
     private TransactionDatabase transactionDatabase;
     private Button addButton;
     private Button removeButton;
     private TextField textField1;
-    private TextField textField2;
-    private TextField filePathField;
-    private PasswordField passwordField;
-    private ComboBox<String> categoryComboBox;
     private ComboBox<Users> userComboBox;
     private Stage stage; // Reference to the stage for file chooser
     private LoginMenuController loginMenuController;
@@ -608,38 +604,18 @@ public class AdminMenuController {
         addButton.setOnAction(event -> addTransaction());
         removeButton.setOnAction(event -> removeTransaction());
 
-        userComboBox = new ComboBox<>(userList);
-        userComboBox.setPromptText("Select a user...");
-
-        textField1 = new TextField();
-        textField1.setPromptText("Report");
-
         // Add buttons and text fields to the layout
-        belowTableView.getChildren().addAll(addButton, removeButton, userComboBox,textField1);
+        belowTableView.getChildren().addAll(addButton, removeButton);
     }
 
     public void addTransaction() {
-        // Get the input from the text fields
-        int userId = userComboBox.getValue().getUserID();
-        String report = textField1.getText();
-
-        // Check if any of the fields are empty
-        if (report.isEmpty()) {
-            showAlert(AlertType.ERROR, "Error", "Missing Information", "Please fill in all fields.");
-            return;
+        AddTransactionWindow addTransactionPopup = new AddTransactionWindow(this,loginMenuController);
+        Stage stagePopup = new Stage();
+        try {
+            addTransactionPopup.start(stagePopup);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-        // Create a new transaction
-        Transaction newTransaction = new Transaction(userId,report);
-
-        // Add the new transaction to the database
-        transactionDatabase.addObject(newTransaction);
-        //Updates the TableView
-        transactionList.add(newTransaction);
-        // Clear the text fields
-        clearTransactionTextField();
-
-        //Alert
-        showAlert(AlertType.INFORMATION,"Success","Successfully Added","Transaction has been added successfully");
     }
 
     public void removeTransaction() {
@@ -652,11 +628,7 @@ public class AdminMenuController {
             showAlert(AlertType.INFORMATION,"Success","Successfully Added","Transaction has been removed successfully");
         }
     }
-    // Helper method to clear Transaction text fields
-    private void clearTransactionTextField() {
-        textField1.clear();
-        textField2.clear();
-    }
+
     public void setStage(Stage primaryStage) {
         stage = primaryStage;
     }

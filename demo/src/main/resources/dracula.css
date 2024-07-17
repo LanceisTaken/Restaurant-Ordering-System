@@ -2659,6 +2659,7 @@ Add support for NO_HEADER tweak in tables .table-view.no-header > .column-header
 }
 
 .text-area {
+  -fx-text-fill: #ff000000;
   -fx-padding: 2px;
   -fx-cursor: default;
 }
