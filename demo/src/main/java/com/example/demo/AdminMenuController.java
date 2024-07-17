@@ -50,10 +50,6 @@ public class AdminMenuController {
     private Button switchToTransactionsButton;
     @FXML
     private Label WelcomeLabel;
-    @FXML
-    private HBox SetCategoryBox;
-    @FXML
-    private HBox RemoveCategoryBox;
     Users currentUser;
     ImageView imageView;
     private TableView<Items> itemsTableView;
@@ -454,10 +450,7 @@ public class AdminMenuController {
     private void switchToItemsTableView() {
         tableViewHolder.getChildren().clear(); // Clear current content
         tableViewHolder.getChildren().add(itemsTableView); // Add items table view
-//        belowTableView.getChildren().clear(); // Clear buttons and text fields
-        SetCategoryBox.getChildren().clear();
-        RemoveCategoryBox.getChildren().clear();
-//        createItemsFields();
+        createItemsFields();
     }
 
     @FXML
@@ -465,8 +458,6 @@ public class AdminMenuController {
         tableViewHolder.getChildren().clear(); // Clear current content
         tableViewHolder.getChildren().add(usersTableView); // Add users table view
         belowTableView.getChildren().clear(); // Clear buttons and text fields
-        SetCategoryBox.getChildren().clear();
-        RemoveCategoryBox.getChildren().clear();
         createUsersFields();
     }
     @FXML
@@ -474,8 +465,6 @@ public class AdminMenuController {
         tableViewHolder.getChildren().clear(); // Clear current content
         tableViewHolder.getChildren().add(transactionTableView); // Add transactions table view
         belowTableView.getChildren().clear(); // Clear buttons and text fields
-        SetCategoryBox.getChildren().clear();
-        RemoveCategoryBox.getChildren().clear();
         createTransactionsFields();
     }
 
