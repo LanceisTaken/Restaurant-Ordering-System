@@ -621,7 +621,7 @@ public class AdminMenuController {
     public void removeTransaction() {
         Transaction selectedTransaction = transactionTableView.getSelectionModel().getSelectedItem();
         if (selectedTransaction != null) {
-            transactionDatabase.removeObject(usersTableView.getSelectionModel().getSelectedIndex());
+            transactionDatabase.removeObject(transactionTableView.getSelectionModel().getSelectedIndex());
             // Update the TableView
             transactionList.remove(selectedTransaction);
             //Alert
