@@ -63,7 +63,6 @@ public class LoginMenu extends Application {
                 return;
             }
 
-
             FXMLLoader loader = new FXMLLoader(fxmlUrl);
             Parent root = loader.load();
             this.controller = loader.getController();

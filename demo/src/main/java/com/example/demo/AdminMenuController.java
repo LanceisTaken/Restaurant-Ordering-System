@@ -56,7 +56,7 @@ public class AdminMenuController {
     private TableView<Users> usersTableView;
     private TableView<Transaction> transactionTableView;
     public ObservableList<Items> itemList;
-    private ObservableList<Users> userList;
+    protected ObservableList<Users> userList;
     private ObservableList<Transaction> transactionList;
     public ItemDatabase itemDatabase;
     private UserDatabase userDatabase;
@@ -550,51 +550,27 @@ public class AdminMenuController {
         }
     }
 
-
-    // Helper method to clear the text fields
-    private void clearItemsTextField() {
-        textField1.clear();
-        textField2.clear();
-        filePathField.clear();
-        imageView.setImage(null);
-        categoryComboBox.getSelectionModel().clearSelection();
-        categoryComboBox.setPromptText("Category");
-    }
     private void createUsersFields() {
         //Input Fields
         addButton = new Button("Add");
         removeButton = new Button("Remove");
-        textField1 = new TextField();
-        textField1.setPromptText("Name");
-        passwordField = new PasswordField();
-        passwordField.setPromptText("Password");
 
         //Event Handling
         addButton.setOnAction(event -> addUser());
         removeButton.setOnAction(event -> removeUser());
 
         // Add buttons and text fields to the layout
-        belowTableView.getChildren().addAll(addButton, removeButton, textField1, passwordField);
+        belowTableView.getChildren().addAll(addButton, removeButton);
     }
 
     public void addUser() {
-        // Get the input from the text fields
-        String name = textField1.getText();
-        String password = textField2.getText();
-
-        // Create a new user with the input
-        Users newUser = new Users(name, password);
-
-        // Add the new user to the database
-        userDatabase.addObject(newUser);
-        //Updates the TableView
-        userList.add(newUser);
-
-        // Clear the text fields
-        clearUserTextField();
-
-        //Alert
-        showAlert(AlertType.INFORMATION,"Success","Successfully Added","User has been added successfully");
+        AddUserWindow addUserPopup = new AddUserWindow(this,loginMenuController);
+        Stage stagePopup = new Stage();
+        try {
+            addUserPopup.start(stagePopup);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void removeUser() {
@@ -606,12 +582,6 @@ public class AdminMenuController {
             //Alert
             showAlert(AlertType.INFORMATION,"Success","Successfully Added","User has been removed successfully");
         }
-    }
-
-    // Helper method to clear User text fields
-    private void clearUserTextField() {
-        textField1.clear();
-        textField2.clear();
     }
     public void showAlert(AlertType alertType, String title, String headerText, String contentText) {
         Alert alert = new Alert(alertType);
@@ -690,6 +660,7 @@ public class AdminMenuController {
     public void setStage(Stage primaryStage) {
         stage = primaryStage;
     }
+
 }
 class CustomDoubleStringConverter extends DoubleStringConverter {
     @Override
