@@ -1,15 +1,10 @@
-To access the app, you have 2 options
 
-Option 1:
+To reset app
 Extract the zip folder and navigate through the files as follows
-demo > src > main > java > com > example > demo > LoginMenu.java
+demo > src > main > java > com > example > demo > UsersDataCreator.java
 
-Run LoginMenu.java
+Run UsersDataCreator.java
 
-Option 2:
-Extract the zip folder, and open the project folder in IntelliJ, and then run LoginMenu.java
-
-If you want to reset the database to default settings with the preset dataset, delete the 4 dat files in demo and run UserDataCreator.
 
 Admin Menu:
 To access the admin menu, the credentials are below:
@@ -17,3 +12,4 @@ To access the admin menu, the credentials are below:
 Username: admin
 Password: admin
 
+Run RestaurantThingy.exe
