@@ -2,7 +2,7 @@
 <launch4jConfig>
   <dontWrapJar>false</dontWrapJar>
   <headerType>gui</headerType>
-  <jar>C:\Users\User\Documents\GitHub\Restaurant-Ordering-System\out\artifacts\RestaurantThing_jar\demo.jar</jar>
+  <jar>C:\Users\User\Documents\GitHub\Restaurant-Ordering-System\out\artifacts\RestaurantThingy\demo.jar</jar>
   <outfile>C:\Users\User\Documents\GitHub\Restaurant-Ordering-System\RestaurantThingy.exe</outfile>
   <errTitle></errTitle>
   <cmdLine></cmdLine>

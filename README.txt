@@ -12,4 +12,7 @@ To access the admin menu, the credentials are below:
 Username: admin
 Password: admin
 
-Run RestaurantThingy.exe
+Run RestaurantThingy.exe to install, then the program should be on your desktop called "LoginMenu" 
+
+I used jpackage to create the exe installer for JavaFX to work, if during install it triggered your anti-virus don't worry it is normal. I assure you it won't harm your computer
+
