@@ -6,7 +6,7 @@ cd /d %APP_HOME%
 echo Current Directory: %cd%
 
 :: Path to the custom JDK image created with jlink
-set JAVA_HOME=C:\Users\User\myapp-runtime
+set JAVA_HOME=C:\Users\User\Documents\GitHub\Restaurant-Ordering-System\demo\src\main\resources\myapp-runtime
 set JAR_FILE=C:\Users\User\Documents\GitHub\Restaurant-Ordering-System\out\artifacts\RestaurantThingy\demo.jar
 
 :: Run the Java application with the custom JDK image
