@@ -3,7 +3,7 @@ To reset app
 Extract the zip folder and navigate through the files as follows
 demo > src > main > java > com > example > demo > UsersDataCreator.java
 
-Run UsersDataCreator.java
+Run "RestaurantThingy.bat"
 
 
 Admin Menu:
